@@ -19,7 +19,6 @@ Este projeto é um temporizador Pomodoro construído em Java Swing. O método Po
 1. **Iniciar Contagem**: Clique no botão "Iniciar" para iniciar a contagem regressiva. O tempo inicial é selecionado a partir de um menu suspenso.
 2. **Pausa e Trabalho**: O programa alterna automaticamente entre períodos de pausa e trabalho.
 3. **Som de Alerta**: Um som será tocado ao final de cada período.
-4. **Parar**: O botão "Parar" irá parar a contagem e reiniciar o temporizador.
 
 ## Explicação de Código (Para Desenvolvedores)
 
