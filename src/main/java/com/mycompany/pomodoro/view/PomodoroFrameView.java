@@ -72,7 +72,7 @@ public class PomodoroFrameView extends javax.swing.JFrame {
         lbTempo.setText("00:00");
 
         cbTempo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        cbTempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1:00", "15:00", "20:00", "25:00", "30:00", "35:00" }));
+        cbTempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "15:00", "20:00", "25:00", "30:00", "35:00" }));
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel2.setText("Tempo");
