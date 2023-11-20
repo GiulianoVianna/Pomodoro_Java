@@ -1,6 +1,5 @@
 package com.mycompany.pomodoro.view;
 
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,13 +7,39 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import java.io.InputStream;
 
+/**
+ * {@code PomodoroFrameView} é uma classe que estende {@link javax.swing.JFrame}
+ * e representa a janela principal da aplicação Pomodoro.
+ * <p>
+ * Esta classe é responsável por criar a interface gráfica do usuário (GUI) para
+ * o aplicativo Pomodoro. Ela inclui componentes para exibir o tempo, iniciar e
+ * pausar a contagem regressiva, e configurar os períodos de trabalho e pausa. A
+ * classe gerencia a interação do usuário com a aplicação e atualiza a GUI de
+ * acordo com o estado atual do temporizador Pomodoro.
+ * </p>
+ * <p>
+ * A classe {@code PomodoroFrameView} encapsula a lógica de inicialização e
+ * configuração dos componentes de interface do usuário, bem como o
+ * gerenciamento de eventos de interação do usuário, como cliques em botões e
+ * seleções em comboboxes.
+ * </p>
+ *
+ * <b>Características principais:</b>
+ * <ul>
+ * <li>Criação e configuração da janela principal da aplicação.</li>
+ * <li>Gerenciamento de componentes da interface do usuário, como rótulos,
+ * botões e comboboxes.</li>
+ * <li>Integração com outras classes para gerenciar a lógica do temporizador
+ * Pomodoro.</li>
+ * </ul>
+ */
 public class PomodoroFrameView extends javax.swing.JFrame {
 
     private Timer timer;
     private int segundosRestantes;
 
     public PomodoroFrameView() {
-        
+
         initComponents();
 
         // Centraliza a janela
@@ -139,7 +164,34 @@ public class PomodoroFrameView extends javax.swing.JFrame {
 
     private boolean emPausa = false; // Variável para controlar se estamos em pausa ou não
 
-    // Método para iniciar a contagem do tempo ou pausa
+    /**
+     * Inicia a contagem regressiva do tempo de trabalho ou pausa. Este método
+     * controla o fluxo de alternância entre períodos de trabalho e pausa. Ele
+     * configura e inicia um timer que conta regressivamente o tempo
+     * especificado, atualiza o rótulo do tempo na interface do usuário e toca
+     * um áudio quando o tempo expira.
+     * <p>
+     * O método verifica se o usuário está em um período de pausa ou não,
+     * seleciona o tempo apropriado do combobox correspondente e o converte em
+     * segundos. Se já houver um timer em execução, ele é interrompido antes de
+     * um novo ser iniciado.
+     * </p>
+     * <p>
+     * Quando o tempo acaba, o timer é parado, um som de notificação é tocado, e
+     * o estado de pausa é invertido. O método então se chama recursivamente
+     * para iniciar a próxima contagem (trabalho ou pausa).
+     * </p>
+     *
+     * <b>Fluxo do método:</b>
+     * <ul>
+     * <li>Verifica se está em pausa ou não.</li>
+     * <li>Seleciona o tempo apropriado e o converte em segundos.</li>
+     * <li>Para o timer anterior, se houver.</li>
+     * <li>Cria e inicia um novo timer.</li>
+     * <li>Atualiza o rótulo de tempo e toca um som quando o tempo acaba.</li>
+     * <li>Alterna o estado de pausa e inicia a próxima contagem.</li>
+     * </ul>
+     */
     private void iniciarContagem() {
 
         String tempoSelecionado; // Variável para armazenar o tempo selecionado pelo usuário
@@ -181,7 +233,33 @@ public class PomodoroFrameView extends javax.swing.JFrame {
         timer.start(); // Inicia o timer
     }
 
-    // Método para tocar um arquivo MP3
+    /**
+     * Toca um arquivo de áudio MP3 especificado. Este método é responsável por
+     * carregar e reproduzir o arquivo MP3 utilizado para notificação sonora.
+     * <p>
+     * O método primeiro tenta carregar o arquivo MP3 do caminho especificado.
+     * Se o arquivo não for encontrado, uma exceção {@code RuntimeException} é
+     * lançada. Após carregar o arquivo, o método utiliza a biblioteca JavaLayer
+     * para reproduzir o som.
+     * </p>
+     * <p>
+     * Em caso de falha na reprodução do áudio, como um problema com o formato
+     * do arquivo ou com a biblioteca JavaLayer, o método captura a exceção
+     * {@code JavaLayerException} e exibe uma mensagem de erro para o usuário.
+     * </p>
+     *
+     * @throws Exception Lança uma exceção genérica se o arquivo MP3 não for
+     * encontrado ou se ocorrer um erro durante a inicialização do player.
+     *
+     * <b>Fluxo do método:</b>
+     * <ul>
+     * <li>Carrega o arquivo MP3 do caminho especificado.</li>
+     * <li>Inicializa o player de MP3.</li>
+     * <li>Toca o arquivo MP3.</li>
+     * <li>Captura e trata qualquer exceção relacionada à reprodução do
+     * áudio.</li>
+     * </ul>
+     */
     private void tocarMp3() throws Exception {
         try {
 
@@ -202,6 +280,26 @@ public class PomodoroFrameView extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Atualiza o rótulo de tempo na interface do usuário com o tempo restante
+     * formatado. Este método é responsável por calcular os minutos e segundos
+     * restantes a partir do total de segundos e atualizar o rótulo
+     * {@code lbTempo} na interface gráfica.
+     * <p>
+     * O tempo é dividido em minutos e segundos, e é formatado para o formato
+     * <code>MM:ss</code>, onde MM representa os minutos e ss representa os
+     * segundos. O formato garante que os minutos e os segundos sejam sempre
+     * exibidos com dois dígitos, preenchendo com zero à esquerda quando
+     * necessário.
+     * </p>
+     *
+     * <b>Fluxo do método:</b>
+     * <ul>
+     * <li>Calcula os minutos e segundos restantes.</li>
+     * <li>Formata o tempo no formato MM:ss.</li>
+     * <li>Atualiza o rótulo {@code lbTempo} com o tempo formatado.</li>
+     * </ul>
+     */
     private void atualizarLabel() {
         int minutos = segundosRestantes / 60;
         int segundos = segundosRestantes % 60;
