@@ -1,6 +1,6 @@
-package View;
+package com.mycompany.pomodoro.view;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,12 +8,12 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import java.io.InputStream;
 
-public class frmPomodoro extends javax.swing.JFrame {
+public class PomodoroFrameView extends javax.swing.JFrame {
 
     private Timer timer;
     private int segundosRestantes;
 
-    public frmPomodoro() {
+    public PomodoroFrameView() {
         
         initComponents();
 
@@ -21,7 +21,7 @@ public class frmPomodoro extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         // Define o ícone da janela
-        ImageIcon icone = new ImageIcon(frmPomodoro.class.getResource("/Imagens/tomate.png"));
+        ImageIcon icone = new ImageIcon(PomodoroFrameView.class.getResource("/Icon/tomate.png"));
         setIconImage(icone.getImage());
 
     }
@@ -47,7 +47,7 @@ public class frmPomodoro extends javax.swing.JFrame {
         lbTempo.setText("00:00");
 
         cbTempo.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        cbTempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00", "15:00", "20:00", "25:00", "30:00", "35:00" }));
+        cbTempo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1:00", "15:00", "20:00", "25:00", "30:00", "35:00" }));
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel2.setText("Tempo");
@@ -119,12 +119,9 @@ public class frmPomodoro extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-        // Chama o método para configurar o tema antes de tornar a janela visível
-        configurarTemaFlatLafDark();
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPomodoro().setVisible(true);
+                new PomodoroFrameView().setVisible(true);
             }
 
         });
@@ -171,7 +168,7 @@ public class frmPomodoro extends javax.swing.JFrame {
                 if (segundosRestantes <= 0) {
                     timer.stop(); // Para o timer
                     try {
-                        tocarMp3("/MP3/sino.mp3"); // Toca o áudio
+                        tocarMp3(); // Toca o áudio
                     } catch (Exception ex) {
                         // Log ou tratamento da exceção
                         JOptionPane.showMessageDialog(null, "Ocorreu um erro: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -185,11 +182,11 @@ public class frmPomodoro extends javax.swing.JFrame {
     }
 
     // Método para tocar um arquivo MP3
-    private void tocarMp3(String caminhoArquivo) throws Exception {
+    private void tocarMp3() throws Exception {
         try {
 
             // Carrega o arquivo MP3 do caminho especificado
-            InputStream is = getClass().getResourceAsStream(caminhoArquivo);
+            InputStream is = getClass().getResourceAsStream("/MP3/sino.mp3");
             if (is == null) {
                 throw new RuntimeException("Arquivo MP3 não encontrado.");
             }
@@ -209,16 +206,6 @@ public class frmPomodoro extends javax.swing.JFrame {
         int minutos = segundosRestantes / 60;
         int segundos = segundosRestantes % 60;
         lbTempo.setText(String.format("%02d:%02d", minutos, segundos));
-    }
-
-    // Método estático para configurar o tema FlatLaf Dark
-    public static void configurarTemaFlatLafDark() {
-        try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (Exception ex) {
-            // Trate a exceção aqui, caso o tema não possa ser aplicado
-            ex.printStackTrace();
-        }
     }
 
 }
