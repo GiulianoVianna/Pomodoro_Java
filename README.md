@@ -3,6 +3,9 @@
 ![image](https://github.com/GiulianoVianna/Pomodoro_Java/assets/101942554/57d278f3-f897-4ba8-8ca8-2837a54424d1)
 
 
+https://github.com/GiulianoVianna/Pomodoro_Java/assets/101942554/a753334a-de43-4f62-b114-4c2acbe2cd80
+
+
 ## Descrição
 
 Este projeto é um temporizador Pomodoro construído em Java Swing. O método Pomodoro é uma técnica de gerenciamento de tempo que envolve trabalhar em ciclos de concentração intensa, geralmente de 25 minutos, seguidos de curtos intervalos de descanso, normalmente de 5 minutos.
